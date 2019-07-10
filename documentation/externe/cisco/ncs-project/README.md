@@ -11,8 +11,8 @@
 Source : https://community.cisco.com/t5/nso-developer-hub-documents/nso-projects/ta-p/3635219
 
 
+### The ncs-project tool
 
-### The ncs-project tool
 
 The ncs-project tool is bundled with NSO and can be used to create a new project:
 
@@ -99,9 +99,9 @@ ncs
 
 So now we have NSO running in this directory, not very interesting since we don't have any packages yet.
 
-### Git
+### Git
 
-This project should be checked into git
+This project should be checked into `git`
 
 ```bash
 # git init .
@@ -123,6 +123,7 @@ Which tells git to ignore all files but the .gitignore files itself.
 
 So let's create such files in logs, ncs-cdb and in state
 
+```bash
 # echo "*\n\!.gitignore" | tee logs/.gitignore ncs-cdb/.gitignore state/.gitignore
 
 ncs-project also generates setup.mk files, I don't want to check those in to git either, so I'll create a .gitignore in the top directory to ignore those:
@@ -251,7 +252,7 @@ reload-result {
 
 ```
 
-### Adding non local packages
+### Adding non local packages
 
 Let's say I want to reuse another package in git, e.g. the IP address allocator:
 
@@ -337,7 +338,7 @@ ncs-project: determining ncs-min-version...ok
 ipaddress-allocator my-service          nso-util            resource-manager
 ```
 
-As you can see, ncs-project pulls all the dependencies needed as well
+As you can see, `ncs-project` pulls all the dependencies needed as well
 
 ```bash
 # make all
