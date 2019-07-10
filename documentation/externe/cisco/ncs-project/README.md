@@ -6,7 +6,7 @@
 
 
 
-# Doc offiicielle `ncs-project`
+# Doc officielle `ncs-project`
 
 Source : https://community.cisco.com/t5/nso-developer-hub-documents/nso-projects/ta-p/3635219
 
