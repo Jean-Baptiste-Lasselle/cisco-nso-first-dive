@@ -88,7 +88,8 @@ service is performing as expected
 Various tools are there bundled with `NSO` to diagnostic network issues.
 
 
-**_For the Devops_**
+#### _For the Devops_
+
 
 `Northbound integration APIs` 
 
@@ -98,6 +99,17 @@ interface:
 
 * A rich **set of northbound APIs** : `NSO` supports APIs ranging from programmatic or RPC-based protocols (such as `NETCONF`/`RESTCONF`) to language bindings like Erlang, Java, Python, and C. `NSO` also provides human-to-machine interfaces, such as a web UI and a set of CLIs. All of these interfaces are automatically rendered from the models that developers create. 
 * **API mediation** : A common impediment service provider developers face is existing OSS/BSS systems with hard-coded southbound calls to infrastructure. With conventional orchestration systems, service providers have to undertake an extensive integration project to change how OSS systems parse parameters to the orchestrator. `NSO` simply adapts to the existing APIs the `OSS` uses. Developers can create data models with that `API`, load them into `NSO`, and map it to the existing service package. The example is `SP-specific`, but `NSO` can provide similar `API` mediation for enterprise systems.
+
+* **Verify** : `NSO` provides development and production test capabilities through its `NetSim` tool (it's a network simulator). This network simulator allows developers to quickly and inexpensively test their code on a realistic simulation of the production environment. `NSO` also provides offline tools for **validating version migration**. These tools validate the extent to which clients or consumers of a service (i.e., an orchestrator or a OSS/BSS system) need updates, so 
+developers can avoid introducing unintended disruptive changes.
+
+* **Package** : When developers release new code, `NSO` provides a self-contained and versioned package format. This 
+means that developers can build and package their work such that the package is the only thing they need to import into the running system. `NSO` also provides hitless package installation and version migration, so developers can introduce new packages or update existing ones at run time, without impacting the operation of the system.
+* **Configure** : `NSO` can integrate into a `CI/CD` pipeline so that infrastructure and infrastructure configuration can be seamlessly deployed in concert with the related software packages. Beyond simplifying initial deployment, this capability is helpful with functions like auto-scaling so adding or deleting app instances also automatically includes the associated infrastructure.
+* **Monitor** : 
+`NSO` provides insight to understand how an app or service is interacting with the infrastructure--is there a 
+performance bottleneck or is a service running out of resources. The `CDB` also provides a single source of 
+truth for performance management, health monitoring, system assurance and similar tools to easily gather operational data on the state of infrastructure.  
 
 > 
 > ### Lexique
