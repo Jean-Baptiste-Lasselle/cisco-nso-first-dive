@@ -173,11 +173,25 @@ truth for performance management, health monitoring, system assurance and simila
 > `OSS` : Un `Operations Support System` ou un `Operational Support System` est l'ensemble des composants opérationnels ou les systèmes informatiques utilisés par un _opérateur de télécommunications_. Elle est synonyme de maintenance opérationnelle dans le domaine des télécommunications.
 > 
 
+# ANNEX : ALTERNATIVE NETWORK SIMULATORS
 
-
+* https://shadow.github.io/ 
+* https://github.com/akeranen/the-one  (nokia )
+* https://github.com/imunes/imunes (docker openVswithc, etc..)
+* https://github.com/CovenantSQL/GNTE  (uses `docker` too)
+* https://github.com/stripe-ctf/octopus
+* https://github.com/mininet/mininet
+* https://github.com/umardx/automarked 
+* 
 
 # References
 
 
 * https://www.youtube.com/watch?v=AGVChkovQ7s
-*
+* https://github.com/napalm-automation/napalm-logs  (nomalization of network devices logging stream) https://github.com/saltstack-formulas/napalm-ntp-formula https://github.com/saltstack-formulas/napalm-bgp-formula https://github.com/saltstack-formulas/napalm-interfaces-formula https://github.com/saltstack-formulas/napalm-lldp-formula https://github.com/saltstack-formulas/napalm-users-formula 
+
+# Just funny
+
+* https://github.com/sartura/network-plugin-openwrt
+
+
