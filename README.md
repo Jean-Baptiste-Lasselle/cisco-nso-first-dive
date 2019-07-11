@@ -182,6 +182,10 @@ truth for performance management, health monitoring, system assurance and simila
 * https://github.com/stripe-ctf/octopus
 * https://github.com/mininet/mininet
 * https://github.com/umardx/automarked 
+
+
+# ANNEX : NETWORK automation
+
 * saltstack / napalm : 
   * https://github.com/napalm-automation/napalm-logs  (nomalization of network devices logging stream)
   * https://github.com/saltstack-formulas/napalm-ntp-formula 
@@ -189,6 +193,10 @@ truth for performance management, health monitoring, system assurance and simila
   * https://github.com/saltstack-formulas/napalm-interfaces-formula 
   * https://github.com/saltstack-formulas/napalm-lldp-formula 
   * https://github.com/saltstack-formulas/napalm-users-formula 
+* ansible / napalm : 
+  * https://github.com/napalm-automation/napalm-ansible
+* napalm : https://github.com/napalm-automation/napalm
+
 
 # References
 
