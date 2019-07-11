@@ -72,7 +72,7 @@ Bout _the gold rule_ : Oh yes, I'm pretty sure `Cisco` named those templates _go
 
 ### Phase 2: Service abstraction
 
-This part essentially is the _infrastructure as a service_ service : what the users of NSO will use to provision and operate their networks.
+This part essentially is the _infrastructure as a service_ service : what the users of `NSO` will use to provision and operate their networks.
 
 **_`dry-run` capabilities_**
 
