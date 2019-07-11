@@ -67,7 +67,7 @@ template, and either make the device comply with the _golden configuration_, or 
 
 Bout _the gold rule_ : Oh yes, I'm pretty sure `Cisco` named those templates _golden configurations_, thinking of them as _golden rules_ (those rules you should never ever break), engraved in the _golden configurations_. _Golden rules_ applied to the network as a whole, indeed.
 
- `Network Elements Drivers (NEDs)` are the components of `NSO` that makes it capable of supporting Multi Vendor Devices  
+ `Network Elements Drivers (NEDs)` are the components of `NSO` that makes it capable of supporting Multi Vendor Devices. Cf. https://www.cisco.com/c/en/us/products/collateral/cloud-systems-management/network-services-orchestrator/datasheet-c78-734669.html
 
 
 ### Phase 2: Service abstraction
