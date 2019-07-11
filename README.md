@@ -88,10 +88,54 @@ service is performing as expected
 Various tools are there bundled with `NSO` to diagnostic network issues.
 
 
-#### _For the Devops_
+### Phase 3: Full DevOps infrastructure automation
+
+#### Yang Models
+
+TO make Infrastructure as code possible, NSO is Model based, and more specifically based on `YANG` models concepts : 
+It's just like `UML` but to specify a network, insted of a software.
 
 
-`Northbound integration APIs` 
+#### FastMap / Reactive FastMap
+
+Those two are designed so that `NSO` works to continually converge the network 
+towards the _**desired state**_
+
+_FastMap_
+
+Developers only need describe the “create” operations 
+for a service. FastMap automatically determines the 
+update, delete, and repair operations needed for 
+any type of run-time service modification, saving the 
+developer the time and effort to define workflows for 
+every conceivable service lifecycle scenario.
+
+_Reactive FastMap_
+
+Ideal for multi-domain and  distributed environments : 
+Reactive FastMap takes a non-linear approach to 
+implementing necessary changes needed to reach a 
+desired state. Some changes (i.e., apply a new firewall 
+rule) might take seconds to implement while others 
+(i.e., spin up a new VM) might take minutes. Instead of 
+getting stuck waiting on changes to complete, Reactive 
+FastMap makes changes where it can and continually re-
+evaluates what still needs to be done
+
+Meaning the FastMap work is parallelized
+
+_Package management_
+
+`NSO` gives developers a comprehensive, systematic 
+approach to package management with tools to 
+manage applications on top of the platform through 
+the full lifecycle of installing, updating, and uninstalling 
+packages. The platform applies strict versioning rules 
+and allows developers to capture dependencies 
+between packages. 
+
+
+#### Northbound integration `APIs` 
 
 To support DevOps processes and serve and an 
 effective bridge, `NSO` provides a stable, flexible software 
@@ -117,12 +161,6 @@ truth for performance management, health monitoring, system assurance and simila
 > `OSS` : Un `Operations Support System` ou un `Operational Support System` est l'ensemble des composants opérationnels ou les systèmes informatiques utilisés par un _opérateur de télécommunications_. Elle est synonyme de maintenance opérationnelle dans le domaine des télécommunications.
 > 
 
-
-
-
-### Phase 3: Full DevOps infrastructure automation
-
-ccc
 
 
 
