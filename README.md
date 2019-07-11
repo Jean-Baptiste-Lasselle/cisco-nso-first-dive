@@ -201,6 +201,15 @@ truth for performance management, health monitoring, system assurance and simila
 
 Il existe 3 modules ansible pour NSO, et voici un white paper ansible / nso : https://github.com/Jean-Baptiste-Lasselle/cisco-nso-first-dive/blob/master/documentation/externe/cisco/1012-oaa-ckn.pdf
 
+* The `nso_verify` module fetches data from NSO, compares with The 
+nso_action
+module performs RPCs on NSO (e.g. check-sync) 
+and validates the output
+•
+The 
+nso_config
+module is used to create and delete instance data 
+in NSO
 # References
 
 
