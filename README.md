@@ -182,13 +182,23 @@ truth for performance management, health monitoring, system assurance and simila
 * https://github.com/stripe-ctf/octopus
 * https://github.com/mininet/mininet
 * https://github.com/umardx/automarked 
-* 
+* saltstack / napalm : 
+  * https://github.com/napalm-automation/napalm-logs  (nomalization of network devices logging stream)
+  * https://github.com/saltstack-formulas/napalm-ntp-formula 
+  * https://github.com/saltstack-formulas/napalm-bgp-formula 
+  * https://github.com/saltstack-formulas/napalm-interfaces-formula 
+  * https://github.com/saltstack-formulas/napalm-lldp-formula 
+  * https://github.com/saltstack-formulas/napalm-users-formula 
 
 # References
 
 
 * https://www.youtube.com/watch?v=AGVChkovQ7s
-* https://github.com/napalm-automation/napalm-logs  (nomalization of network devices logging stream) https://github.com/saltstack-formulas/napalm-ntp-formula https://github.com/saltstack-formulas/napalm-bgp-formula https://github.com/saltstack-formulas/napalm-interfaces-formula https://github.com/saltstack-formulas/napalm-lldp-formula https://github.com/saltstack-formulas/napalm-users-formula 
+
+* https://dtucker.co.uk/work/netconf-yang-restconf-and-netops-in-an-sdn-world.html :  dans cet article, l'auteur évoque l'intérêt de la _Northbound API_ pour l'accès au niveau _devices_.
+* https://dzone.com/articles/5-steps-to-automated-netops
+* https://github.com/cilium/cilium/
+* https://github.com/logzilla/logzilla-opengear
 
 # Just funny
 
