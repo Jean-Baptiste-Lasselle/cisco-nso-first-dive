@@ -10,7 +10,6 @@
 
  
  
-  <code><script type="text/javascript"></script> 
    <link rel="stylesheet" href="/etc/designs/cdc/transformation/wemdcmt_responsive.css"> 
    <link rel="stylesheet" href="/etc/designs/cdc/transformation/wemdcmt_responsive.css"></code> 
   <div class="WordSection1"> 
