@@ -11,7 +11,12 @@ A firsst dive ito Cisco 's NSO Network Service Orchestrator, to see what's there
   > The `ncs-project` tool is bundled with NSO and can be used to create a new project
 
 
-Let there be https://github.com/Jean-Baptiste-Lasselle/cisco-nso-first-dive/blob/master/documentation/externe/cisco/nso-bridge-automation.pdf : 
+## Analyzing the Cisco NSO Devops whitepaper
+
+https://github.com/Jean-Baptiste-Lasselle/cisco-nso-first-dive/blob/master/documentation/externe/cisco/nso-bridge-automation.pdf  
+
+
+
 
 ### Phase 1: Build a programmable network interface
 
@@ -51,6 +56,7 @@ Network engineers and operations teams can use
 the same tools they use now—CLI scripting or `REST` 
 interfaces—to manipulate the configuration lifecycle 
 of devices as a single set.
+
 The devices can be grouped, an their configurations can be based on templates called `golden configuration`.
 `golden configurations` can be updated, continuously.
 
@@ -60,6 +66,8 @@ the network for any element that deviates from the
 template, and either make the device comply with the _golden configuration_, or allowing the device to break the _golden rule_, but explicitly, and under permission control, certainly. 
 
 Bout _the gold rule_ : Oh yes, I'm pretty sure `Cisco` named those templates _golden configurations_, thinking of them as _golden rules_ (those rules you should never ever break), engraved in the _golden configurations_. _Golden rules_ applied to the network as a whole, indeed.
+
+ `Network Elements Drivers (NEDs)` are the components of `NSO` that makes it capable of supporting Multi Vendor Devices  
 
 
 ### Phase 2: Service abstraction
