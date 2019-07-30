@@ -2,6 +2,11 @@
 
 ![Nb min en une semaine](https://github.com/Jean-Baptiste-Lasselle/cisco-nso-first-dive/raw/master/documentation/images/NOMBRE_MINUTES_EN_UNE_SEMAINE_2019-07-29%2023-37-21.png)
 
+R2férence à ajouter pour le passage sur une branche `export LA_BRANCHE_DEV_OU_LABO` : 
+
+* https://confluence.atlassian.com/bitbucket/checkout-a-branch-into-a-local-repository-313466957.html
+* `git checkout $LA_BRANCHE_DEV_OU_LABO`, ainsi en créant une nouvelle branche à partir de cet état, on créée la branche en partant du dernier commit de la branche `$LA_BRANCHE_DEV_OU_LABO`.
+
 # cisco-nso-first-dive
 
 A first dive ito Cisco 's NSO Network Service Orchestrator, to see what's there related to SDN. And how to setup a proper Infrastructure As Code toolchain  
