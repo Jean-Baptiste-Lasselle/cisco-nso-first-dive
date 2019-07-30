@@ -46,7 +46,10 @@ echo "https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/merge_requests.md
 # sudo yum install -y jq yq
 
 # 
-# Exemple du cas d'une application NodeJS
+# Exemple du cas d'une application NodeJS : 
+# 
+# => Création automatique et 'silencieuse' du repo git mock du repo git
+#    permettant les tests / démos / pocs de workflow git
 #  
 
 export ACCESS_TOKEN_DU_USER=NaSCKh68YWq2dH38A_eJ
