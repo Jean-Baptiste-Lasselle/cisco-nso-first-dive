@@ -42,7 +42,52 @@ git add --all && git commit -m "COMMIT_MESSAGE" && git push
 
 echo "https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/merge_requests.md#create-mr"
 
+
+# sudo yum install -y jq yq
+
+# 
+# Exemple du cas d'une application NodeJS
+#  
+
+export ACCESS_TOKEN_DU_USER=NaSCKh68YWq2dH38A_eJ
+# export ACCESS_TOKEN_DU_USER=RURab-tb5wdsTH72L55v
+export NEW_REPO_NAME=mon-appli-nodejs
+export GITLAB_GROUP_INTO_WHICH_TO_CREATE_REPO=playground
+export GITLAB_HOSTNAME=gitlab.com
+
+# La seule manière d'obtenir tous mes groupes est de n'utiliser
+# qu'un et un seul paramètre à la requête HTTP/GET, 'per_page', et son 
+# paramètre associé qui permet de préciser le numéro de page
+export I_KNOW_I_HAVE_LESS_GROUPS_THAN_THAT=1000
+export GET_REQ_PARAMS="per_page=$I_KNOW_I_HAVE_LESS_GROUPS_THAN_THAT"
+
+# Affiche directement le groupe gitlab 'playground' contenu dans le groupe 'mon.bureau'
+
+curl --header "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER" -X GET "https://$GITLAB_HOSTNAME/api/v4/groups?$GET_REQ_PARAMS" | jq --arg GRP_NAME "$GITLAB_GROUP_INTO_WHICH_TO_CREATE_REPO"  '.[] | select(.name==$GRP_NAME)'
+
+# Je veux que le repo ait  pour URL finale : https://gitlab.com/second-bureau/pegasus/gatsby-conduite-io
+# C'est à dire que le nouveau repository soit placé dans le groupe de repos  
+# Stocke l'ID recherché, du groupe [second-bureau/pegasus], dans la variable [$ID_DU_GROUPE_CIBLE]
+export ID_DU_GROUPE_CIBLE=$(curl --header "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER" -X GET "https://$GITLAB_HOSTNAME/api/v4/groups?$GET_REQ_PARAMS" | jq --arg GRP_NAME "$GITLAB_GROUP_INTO_WHICH_TO_CREATE_REPO"  '.[] | select(.name==$GRP_NAME)' | jq .id)
+
+echo "ID_DU_GROUPE_CIBLE=$ID_DU_GROUPE_CIBLE "
+
+
+# export ID_DU_GROUPE_CIBLE=$(curl --header "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER"  https://$GITLAB_HOSTNAME/api/v4/groups/yooma/subgroups| jq '.[] | select(.name=="jibfaitdestests")' | jq .id)
+
+
+
+export PAYLOAD="{ \"name\": \"$NEW_REPO_NAME\", \"namespace_id\": \"$ID_DU_GROUPE_CIBLE\" }"
+
+
+curl -H "Content-Type: application/json" -H "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER" -X POST --data "$PAYLOAD" https://$GITLAB_HOSTNAME/api/v4/projects
+
+echo "Ce script devra être testé pour le cas où deux groueps de même noms soient créés comme sous-groupes de deux groupes distincts."
+echo "Ce script devra évoluer pour permettre à son utilisateur de préciser lui-même directement l' [ID_DU_GROUPE_CIBLE=$GITLAB_HOSTNAME] "
+
 ```
+
+* https://gitlab.com/second-bureau/pegasus/pipeline-step-lab/tree/master/docker/git  (recette prête de l'invocation de l'API dans tous les ues cases des workflows)
 
 
 # Cisco-nso-first-dive
