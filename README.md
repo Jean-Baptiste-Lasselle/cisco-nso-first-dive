@@ -2,21 +2,39 @@
 
 ![Nb min en une semaine](https://github.com/Jean-Baptiste-Lasselle/cisco-nso-first-dive/raw/master/documentation/images/NOMBRE_MINUTES_EN_UNE_SEMAINE_2019-07-29%2023-37-21.png)
 
-Références à ajouter pour le passage sur une branche `export LA_BRANCHE_DEV_OU_LABO` : 
+Références à ajouter pour le passage sur une branche `export LA_BRANCHE_MANAGERIALE` : 
 
 * https://confluence.atlassian.com/bitbucket/checkout-a-branch-into-a-local-repository-313466957.html
 * https://stackoverflow.com/questions/4470523/create-a-branch-in-git-from-another-branch
 
-On exécute la commande `git checkout $LA_BRANCHE_DEV_OU_LABO`, ainsi en créant une nouvelle branche à partir de cet état, on créée la branche en partant du dernier commit de la branche `$LA_BRANCHE_DEV_OU_LABO`.
+On exécute la commande `git checkout $LA_BRANCHE_MANAGERIALE`, ainsi en créant une nouvelle branche à partir de cet état, on créée la branche en partant du dernier commit de la branche `$LA_BRANCHE_MANAGERIALE`.
 
 On aura ausi une recette de la forme : 
 
 ```bash
+export GITLAB_HOSTNAME=gitlab.com
+export ACCESS_TOKEN_DU_USER=NaSCLm68YWq2dH38A_eJ
+
+# sudo yum install -y jq yq
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# 
+# Exemple typique : 
+# 
+# => Utilisation d'une branche de travail créée à partir d'un branche de validation managériale
+#    et envoi automatique de la merge request
+#  
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
 
 export NOM_DE_MA_BRANCHE_DE_TRAVAIL=feature-xxx
 
-# Creates MyFeature branch off of the last commit on the '$LA_BRANCHE_DEV_OU_LABO' branch. 
-git checkout -b $NOM_DE_MA_BRANCHE_DE_TRAVAIL $LA_BRANCHE_DEV_OU_LABO
+# Creates MyFeature branch off of the last commit on the '$LA_BRANCHE_MANAGERIALE' branch. 
+git checkout -b $NOM_DE_MA_BRANCHE_DE_TRAVAIL $LA_BRANCHE_MANAGERIALE
 
 # Then you just code (edit files), aka do your work, and then
 
@@ -43,14 +61,36 @@ git add --all && git commit -m "COMMIT_MESSAGE" && git push
 echo "https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/merge_requests.md#create-mr"
 
 
-# sudo yum install -y jq yq
 
+export NOM_DU_REPO_DE_LA_MERGE_REQUEST=mock-repo-tgs
+
+
+
+export ID_DU_REPO_SUR_LEQUEL_FAIRE_LA_MERGE_REQUEST=$(curl --header "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER" -X GET "https://$GITLAB_HOSTNAME/api/v4/projects?$GET_REQ_PARAMS" | jq --arg REPO_NAME "$NOM_DU_REPO_DE_LA_MERGE_REQUEST"  '.[] | select(.name==$REPO_NAME)' | jq .id)
+
+
+export MERGE_REQUEST_CREATION_PAYLOAD="{ \"source_branch\": \"$NOM_DE_MA_BRANCHE_DE_TRAVAIL\", \"target_branch\": \"$LA_BRANCHE_MANAGERIALE\" }"
+
+# 
+# Endpoint POST /projects/:id/merge_requests
+# 
+curl -H "Content-Type: application/json" -H "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER" -X POST --data "$MERGE_REQUEST_CREATION_PAYLOAD" https://$GITLAB_HOSTNAME/api/v4/projects/$ID_DU_REPO_SUR_LEQUEL_FAIRE_LA_MERGE_REQUEST/merge_requests
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # 
 # Exemple du cas d'une application NodeJS : 
 # 
 # => Création automatique et 'silencieuse' du repo git mock du repo git
 #    permettant les tests / démos / pocs de workflow git
 #  
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 
 export ACCESS_TOKEN_DU_USER=NaSCKh68YWq2dH38A_eJ
 # export ACCESS_TOKEN_DU_USER=RURab-tb5wdsTH72L55v
@@ -64,29 +104,63 @@ export GITLAB_HOSTNAME=gitlab.com
 export I_KNOW_I_HAVE_LESS_GROUPS_THAN_THAT=1000
 export GET_REQ_PARAMS="per_page=$I_KNOW_I_HAVE_LESS_GROUPS_THAN_THAT"
 
-# Affiche directement le groupe gitlab 'playground' contenu dans le groupe 'mon.bureau'
+
+
+# Affiche directement le groupe gitlab '$GITLAB_GROUP_INTO_WHICH_TO_CREATE_REPO', contenu dans le groupe 'mon.bureau'
 
 curl --header "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER" -X GET "https://$GITLAB_HOSTNAME/api/v4/groups?$GET_REQ_PARAMS" | jq --arg GRP_NAME "$GITLAB_GROUP_INTO_WHICH_TO_CREATE_REPO"  '.[] | select(.name==$GRP_NAME)'
 
-# Je veux que le repo ait  pour URL finale : https://gitlab.com/second-bureau/pegasus/gatsby-conduite-io
-# C'est à dire que le nouveau repository soit placé dans le groupe de repos  
-# Stocke l'ID recherché, du groupe [second-bureau/pegasus], dans la variable [$ID_DU_GROUPE_CIBLE]
+# 
+# 
+# => Je veux que le repo ait  pour URL finale :
+#             https://gitlab.com/mon.bureau/$GITLAB_GROUP_INTO_WHICH_TO_CREATE_REPO/$NEW_REPO_NAME
+# 
+# C'est à dire que le nouveau repository git soit placé dans le groupe de repos  'mon.bureau/$GITLAB_GROUP_INTO_WHICH_TO_CREATE_REPO'
+# 
+# Stocke l'ID recherché, du groupe [$GITLAB_GROUP_INTO_WHICH_TO_CREATE_REPO], dans la variable [$ID_DU_GROUPE_CIBLE]
 export ID_DU_GROUPE_CIBLE=$(curl --header "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER" -X GET "https://$GITLAB_HOSTNAME/api/v4/groups?$GET_REQ_PARAMS" | jq --arg GRP_NAME "$GITLAB_GROUP_INTO_WHICH_TO_CREATE_REPO"  '.[] | select(.name==$GRP_NAME)' | jq .id)
 
 echo "ID_DU_GROUPE_CIBLE=$ID_DU_GROUPE_CIBLE "
 
 
-# export ID_DU_GROUPE_CIBLE=$(curl --header "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER"  https://$GITLAB_HOSTNAME/api/v4/groups/yooma/subgroups| jq '.[] | select(.name=="jibfaitdestests")' | jq .id)
+export REPO_CREATION_PAYLOAD="{ \"name\": \"$NEW_REPO_NAME\", \"namespace_id\": \"$ID_DU_GROUPE_CIBLE\" }"
 
-
-
-export PAYLOAD="{ \"name\": \"$NEW_REPO_NAME\", \"namespace_id\": \"$ID_DU_GROUPE_CIBLE\" }"
-
-
-curl -H "Content-Type: application/json" -H "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER" -X POST --data "$PAYLOAD" https://$GITLAB_HOSTNAME/api/v4/projects
+echo "REPO_CREATION_PAYLOAD : "
+echo "{$REPO_CREATION_PAYLOAD}"
+curl -H "Content-Type: application/json" -H "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER" -X POST --data "$REPO_CREATION_PAYLOAD" https://$GITLAB_HOSTNAME/api/v4/projects
 
 echo "Ce script devra être testé pour le cas où deux groueps de même noms soient créés comme sous-groupes de deux groupes distincts."
 echo "Ce script devra évoluer pour permettre à son utilisateur de préciser lui-même directement l' [ID_DU_GROUPE_CIBLE=$GITLAB_HOSTNAME] "
+
+# 
+# TODO : List project's merge requests
+# 
+# GET /projects/:id/merge_requests
+# GET /projects/:id/merge_requests?state=opened
+# GET /projects/:id/merge_requests?state=all
+# GET /projects/:id/merge_requests?iids[]=42&iids[]=43
+# GET /projects/:id/merge_requests?milestone=release
+# GET /projects/:id/merge_requests?labels=bug,reproduced
+# GET /projects/:id/merge_requests?my_reaction_emoji=star
+# 
+
+if [ -f ./API_CALL_GET_PARAMS.list ]; then
+  rm -f ./API_CALL_GET_PARAMS.list
+fi
+
+echo "state=all" >> ./API_CALL_GET_PARAMS.list
+echo "state=opened" >> ./API_CALL_GET_PARAMS.list
+echo "iids[]=37&iids[]=43" >> ./API_CALL_GET_PARAMS.list
+echo "milestone=canary-wave2" >> ./API_CALL_GET_PARAMS.list
+echo "labels=devops,bug,reproduced" >> ./API_CALL_GET_PARAMS.list
+echo "my_reaction_emoji=star" >> ./API_CALL_GET_PARAMS.list
+echo "my_reaction_emoji=dadjoke" >> ./API_CALL_GET_PARAMS.list
+
+
+while read LIST_MERGE_REQUEST_GET_REQ_PARAMS; do
+  echo "LIST_MERGE_REQUEST_GET_REQ_PARAMS=[$LIST_MERGE_REQUEST_GET_REQ_PARAMS]"
+  # curl --header "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER" -X GET "https://$GITLAB_HOSTNAME/api/v4/projects/$ID_DU_REPO_SUR_LEQUEL_FAIRE_LA_MERGE_REQUEST/merge_requests?$LIST_MERGE_REQUEST_GET_REQ_PARAMS" | jq '.[]'
+done <./API_CALL_GET_PARAMS.list
 
 ```
 
