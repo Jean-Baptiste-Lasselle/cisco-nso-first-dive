@@ -158,7 +158,13 @@ echo "my_reaction_emoji=dadjoke" >> ./API_CALL_GET_PARAMS.list
 
 
 while read CURRENT_LIST_MERGE_REQUEST_GET_REQ_PARAMS; do
+  echo " "
+  echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+  echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+  echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+  echo " "
   echo "CURRENT_LIST_MERGE_REQUEST_GET_REQ_PARAMS=[$CURRENT_LIST_MERGE_REQUEST_GET_REQ_PARAMS]"
+  echo "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
   export LIST_MERGE_REQUEST_GET_REQ_PARAMS=$CURRENT_LIST_MERGE_REQUEST_GET_REQ_PARAMS
   # So finally calling Gitlab's RESTful API v4 through its neat GraphQL new skin 
   curl --header "PRIVATE-TOKEN: $ACCESS_TOKEN_DU_USER" -X GET "https://$GITLAB_HOSTNAME/api/v4/projects/$ID_DU_REPO_SUR_LEQUEL_FAIRE_LA_MERGE_REQUEST/merge_requests?$LIST_MERGE_REQUEST_GET_REQ_PARAMS" | jq '.[]'
