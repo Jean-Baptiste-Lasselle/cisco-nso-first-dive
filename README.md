@@ -2,12 +2,50 @@
 
 ![Nb min en une semaine](https://github.com/Jean-Baptiste-Lasselle/cisco-nso-first-dive/raw/master/documentation/images/NOMBRE_MINUTES_EN_UNE_SEMAINE_2019-07-29%2023-37-21.png)
 
-R2férence à ajouter pour le passage sur une branche `export LA_BRANCHE_DEV_OU_LABO` : 
+Références à ajouter pour le passage sur une branche `export LA_BRANCHE_DEV_OU_LABO` : 
 
 * https://confluence.atlassian.com/bitbucket/checkout-a-branch-into-a-local-repository-313466957.html
-* `git checkout $LA_BRANCHE_DEV_OU_LABO`, ainsi en créant une nouvelle branche à partir de cet état, on créée la branche en partant du dernier commit de la branche `$LA_BRANCHE_DEV_OU_LABO`.
+* https://stackoverflow.com/questions/4470523/create-a-branch-in-git-from-another-branch
 
-# cisco-nso-first-dive
+On exécute la commande `git checkout $LA_BRANCHE_DEV_OU_LABO`, ainsi en créant une nouvelle branche à partir de cet état, on créée la branche en partant du dernier commit de la branche `$LA_BRANCHE_DEV_OU_LABO`.
+
+On aura ausi une recette de la forme : 
+
+```bash
+
+export NOM_DE_MA_BRANCHE_DE_TRAVAIL=feature-xxx
+
+# Creates MyFeature branch off of the last commit on the '$LA_BRANCHE_DEV_OU_LABO' branch. 
+git checkout -b $NOM_DE_MA_BRANCHE_DE_TRAVAIL $LA_BRANCHE_DEV_OU_LABO
+
+# Then you just code (edit files), aka do your work, and then
+
+# 
+# 'git commit -a' automatically stage all tracked, modified files before the commit 
+# If you think the git add stage of the workflow is too cumbersome, Git allows you to
+# skip that part with the -a option. This basically tells Git to run git add on any file that 
+# is "tracked" - that is, any file that was in your last commit and has been modified.
+# 
+
+export COMMIT_MESSAGE=""
+COMMIT_MESSAGE="$COMMIT_MESSAGE Your commit message. Respect."
+
+
+# Now we will just push the new commits, and won't merge localy, but in th staed wil use Gitlab's RESTful API to send a merge request
+
+git add --all && git commit -m "COMMIT_MESSAGE" && git push
+
+# So no local merge of your changes to dev (with or without a fast-forward)
+
+
+# Finally , calling the Gitlab's RESTful API to create a new merge request (which will require a manager's gonogo) :  
+
+echo "https://github.com/gitlabhq/gitlabhq/blob/master/doc/api/merge_requests.md#create-mr"
+
+```
+
+
+# Cisco-nso-first-dive
 
 A first dive ito Cisco 's NSO Network Service Orchestrator, to see what's there related to SDN. And how to setup a proper Infrastructure As Code toolchain  
 
